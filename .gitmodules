@@ -1,3 +1,0 @@
-[submodule "external/doctest"]
-	path = external/doctest
-	url = git@github.com:onqtam/doctest.git

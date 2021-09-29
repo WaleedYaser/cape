@@ -1,0 +1,7 @@
+file(GLOB cape_tests src/*.cpp)
+foreach(cape_test_cpp ${cape_tests})
+	cmake_path(GET cape_test_cpp STEM cape_test_name)
+	message(DEBUG "[CAPE_TESTS]: Add '" ${cape_test_name} "' (" ${cape_test_cpp} ")")
+	add_executable(${cape_test_name} ${cape_test_cpp})
+	add_test(NAME ${cape_test_name} COMMAND ${cape_test_name})
+endforeach()
