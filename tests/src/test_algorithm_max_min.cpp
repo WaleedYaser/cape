@@ -50,4 +50,37 @@ int main()
 		assert(cape::min({a, b, c}, compare_number) == c);
 		assert(cape::min({b, a, c}, compare_number) == c);
 	}
+
+
+	{
+		assert(cape::minmax(5, 10).first == 5);
+		assert(cape::minmax(5, 10).second == 10);
+
+		assert(cape::minmax(10, 5).first == 5);
+		assert(cape::minmax(10, 5).second == 10);
+
+		assert(cape::minmax({5, 10, 122}).first == 5);
+		assert(cape::minmax({5, 10, 122}).second == 122);
+
+		assert(cape::minmax({10, 122, 5}).first == 5);
+		assert(cape::minmax({10, 122, 5}).second == 122);
+	}
+
+	{
+		Number a{5};
+		Number b{10};
+		Number c{122};
+
+		assert(cape::minmax(a, b, compare_number).first == a);
+		assert(cape::minmax(a, b, compare_number).second == b);
+
+		assert(cape::minmax(b, a, compare_number).first == a);
+		assert(cape::minmax(b, a, compare_number).second == b);
+
+		assert(cape::minmax({a, b, c}, compare_number).first == a);
+		assert(cape::minmax({a, b, c}, compare_number).second == c);
+
+		assert(cape::minmax({b, a, c}, compare_number).first == a);
+		assert(cape::minmax({b, a, c}, compare_number).second == c);
+	}
 }
