@@ -1,7 +1,15 @@
 #pragma once
 
+#include "cape/type_traits.h"
+
 namespace cape
 {
+	template <class T>
+	constexpr cape::remove_reference_t<T>&& move(T&& t) noexcept
+	{
+		return static_cast<cape::remove_reference_t<T>&&>(t);
+	}
+
 	template <class T1, class T2>
 	struct pair
 	{
