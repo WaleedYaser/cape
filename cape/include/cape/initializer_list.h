@@ -43,7 +43,6 @@ namespace std
 		const T* last;
 #else
 		constexpr initializer_list() noexcept : first(nullptr), count(0) {}
-		constexpr initializer_list(const T* first, cape::size_t) noexcept : first(first), count(0) {}
 
 		constexpr cape::size_t size() const noexcept { return count; }
 
@@ -51,6 +50,8 @@ namespace std
 		constexpr const T* end() const noexcept { return first + count; }
 
 	private:
+		constexpr initializer_list(const T* first, cape::size_t) noexcept : first(first), count(0) {}
+
 		const T* first;
 		cape::size_t count;
 #endif
