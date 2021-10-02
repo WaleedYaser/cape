@@ -1,5 +1,6 @@
 #pragma once
 
+#include "cape/defines.h"
 #include "cape/types.h"
 
 /*
@@ -28,6 +29,7 @@ namespace std
 		using iterator        = const T*;
 		using const_iterator  = const T*;
 
+#if CAPE_MSVC
 		constexpr initializer_list() noexcept : first(nullptr), last(nullptr) {}
 		constexpr initializer_list(const T* first, const T* last) noexcept : first(first), last(last) {}
 
@@ -39,6 +41,19 @@ namespace std
 	private:
 		const T* first;
 		const T* last;
+#else
+		constexpr initializer_list() noexcept : first(nullptr), count(0) {}
+		constexpr initializer_list(const T* first, cape::size_t) noexcept : first(first), count(0) {}
+
+		constexpr cape::size_t size() const noexcept { return count; }
+
+		constexpr const T* begin() const noexcept { return first; }
+		constexpr const T* end() const noexcept { return first + count; }
+
+	private:
+		const T* first;
+		cape::size_t count;
+#endif
 	};
 
 	template <class T>
