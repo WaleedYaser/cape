@@ -1,5 +1,6 @@
 set(HEADER_FILES
 	include/cape/Exports.h
+	include/cape/defines.h
 	include/cape/types.h
 	include/cape/initializer_list.h
 	include/cape/algorithm.h
