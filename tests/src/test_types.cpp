@@ -15,4 +15,6 @@ int main()
 	assert(typeid(cape::uint16_t) == typeid(std::uint16_t));
 	assert(typeid(cape::uint32_t) == typeid(std::uint32_t));
 	assert(typeid(cape::uint64_t) == typeid(std::uint64_t));
+
+	assert(typeid(cape::size_t) == typeid(std::size_t));
 }
