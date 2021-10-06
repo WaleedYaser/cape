@@ -1,10 +1,7 @@
 #pragma once
 
-#include "cape/defines.h"
-#include "cape/types.h"
-
 /*
- * Why I use 'std' namespace here insteadd of 'cape' is due to this answer: https://stackoverflow.com/a/18166383
+ * Why I use 'std::initializer_list'  insteadd implementing it myself is due to this answer: https://stackoverflow.com/a/18166383
  * The name is important because the standard says it is. The standard needs some way for you to be able to say, "this
  * constructor can be passed a braced-init-list containing a sequence of values of the type T". That way was given the
  * name "std::initializer_list".
@@ -16,7 +13,16 @@
  * standard library is not optional.
  */
 
-#if CAPE_MSVC
+#include <initializer_list>
+
+namespace cape
+{
+	template <class T>
+	using initializer_list = std::initializer_list<T>;
+}
+
+// my implamentation for initializer_list based on cpprefereence and implementation of MSVC
+#if 0
 
 namespace std
 {
@@ -50,10 +56,5 @@ namespace std
 	template <class T>
 	constexpr const T* end(initializer_list<T> list) noexcept { return list.end(); }
 }
-
-#else
-
-// TODO: implement initializer list on linux and macos
-#include <initializer_list>
 
 #endif

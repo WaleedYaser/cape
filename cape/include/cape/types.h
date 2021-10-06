@@ -12,5 +12,5 @@ namespace cape
 	using uint32_t = unsigned int;
 	using uint64_t = unsigned long long;
 
-	using size_t   = uint64_t;
+	using size_t = uint64_t;
 }
