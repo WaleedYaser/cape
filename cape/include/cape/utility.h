@@ -10,6 +10,20 @@ namespace cape
 		return static_cast<cape::remove_reference_t<T>&&>(t);
 	}
 
+	// forward lvalues as either lvalues or as rvalues depending on T
+	template <class T>
+	constexpr T&& forward(cape::remove_reference_t<T>& t) noexcept
+	{
+		return static_cast<T&&>(t);
+	}
+
+	// forward rvalues as rvalues and prohibits forwarding of rvalues as lvalues
+	template <class T>
+	constexpr T&& forward(cape::remove_reference_t<T>&& t) noexcept
+	{
+		return static_cast<T&&>(t);
+	}
+
 	template <class T1, class T2>
 	struct pair
 	{
