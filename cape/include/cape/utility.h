@@ -1,5 +1,6 @@
 #pragma once
 
+#include "cape/types.h"
 #include "cape/type_traits.h"
 
 namespace cape
@@ -22,6 +23,23 @@ namespace cape
 	constexpr T&& forward(cape::remove_reference_t<T>&& t) noexcept
 	{
 		return static_cast<T&&>(t);
+	}
+
+	template <class T>
+	requires is_move_constructible_v<T> && is_move_assignable_v<T>
+	constexpr void swap(T& a, T& b) noexcept (is_nothrow_move_constructible_v<T> && is_nothrow_move_assignable_v<T>)
+	{
+		T tmp(move(a));
+		a = move(b);
+		b = move(tmp);
+	}
+
+	template <class T, size_t N>
+	requires is_swappable_v<T>
+	constexpr void swap(T (&a)[N], T(&b)[N]) noexcept (is_nothrow_swappable_v<T>)
+	{
+		for (size_t i = 0; i < N; ++i)
+			swap(a[i], b[i]);
 	}
 
 	template <class T1, class T2>
