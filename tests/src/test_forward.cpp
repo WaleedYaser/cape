@@ -19,17 +19,17 @@ struct B
 	A a1, a2, a3;
 };
 
-template<typename... T>
-B make_b(T&&... arg)
+template<class T, class... Args>
+T make_t(Args&&... args)
 {
-	return B(cape::forward<T>(arg)...);
+	return T(cape::forward<Args>(args)...);
 }
 
 int main()
 {
 	const int n1 = 10;
 	int n2 = 5;
-	B b = make_b(n1, n2, 3);
+	B b = make_t<B>(n1, n2, 3);
 
 	assert(b.a1.n == n1 && b.a1.lvalue == 0 && b.a1.rvalue == 0);
 	assert(b.a2.n == 0 && b.a2.lvalue == n2 && b.a2.rvalue == 0);
